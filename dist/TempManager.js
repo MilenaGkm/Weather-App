@@ -36,8 +36,9 @@ class Manager {
 
 	saveCity(cityName) {
 		console.log('a2');
-		$.post('/city', () => {
-
+		
+		$.post('/city', cityName, () => {
+			
 		})
 	}
 

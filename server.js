@@ -14,7 +14,7 @@ app.use(express.static(path.join(__dirname, 'node_modules')))
 
 app.use('/', api)
 
-const port = 9001
+const port = 3000
 app.listen(port, function(){
-    console.log(`Running server on port ${port}, ITS OVER 9000!!!`)
+    console.log(`Running server on port ${port}`)
 })
