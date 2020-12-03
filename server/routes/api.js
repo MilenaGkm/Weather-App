@@ -29,10 +29,10 @@ router.get('/cities', async (req, res) => {
 router.post('/city', async (req, res) => {
 	const  city  = req.body
 	const cityWeather = new Weather({
-		name: city.name,
-		temperature: city.main.temp,
-		condition: city.weather.description,
-		conditionPic: city.weather.icon
+		CityName: city.name,
+		Temperature: city.main.temp,
+		Conditions: city.weather[0].description, 
+		ConditionIcon: city.weather[0].icon
 	})
 	const saveCity = await cityWeather.save()
 	res.send(saveCity)

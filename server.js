@@ -6,7 +6,7 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/WeatherAppDB', { useNewUrlParser: true, useUnifiedTopology: true })
 
-app.use(cors())
+// app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'dist')))

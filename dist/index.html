@@ -13,13 +13,37 @@
 		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
-		<!--[if lt IE 7]>
-			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-		<![endif]-->
 
-		<button onclick="onFetchData()">get city name</button>
-		<script src="../node_modules/handlebars/dist/handlebars.js"></script>
-		<script src="../node_modules/jquery/dist/jquery.js"></script>
+		<div id="search">
+			<input id="city-input" placeholder="City Name">
+			<button id="search-btn" onclick="searchBtn()">Search City</button>
+		</div>
+
+		<div class="weather-container"></div>
+
+		<script id="weather-template" type="text/x-handlebars-template">
+			{{#each cityData}}
+			<div>
+				<span> {{CityName}} </span>
+				<br>
+				<span> {{Temperature}} </span>
+				<br>
+				<span> {{Conditions}} </span>
+				<br>
+				<img src={{ConditionIcon}} >
+				<br>
+			</div>
+			{{/each}}
+		</script>
+
+
+		<!-- <button onclick="onFetchData()">get city name</button> -->
+		
+		<script src="/handlebars/dist/handlebars.js"></script>
+		<script src="/jquery/dist/jquery.js"></script>
+		<!-- <script src="/node_modules/handlebars/dist/handlebars.js"></script> -->
+		<!-- <script src="../node_modules/handlebars/dist/handlebars.js"></script>
+		<script src="../node_modules/jquery/dist/jquery.js"></script> -->
 		<script src="TempManager.js" async defer></script>
 		<script src="Renderer.js" async defer></script>
 		<script src="main.js" async defer></script>

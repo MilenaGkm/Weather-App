@@ -7,22 +7,22 @@ class Manager {
 	getDataFromDB() {
 		$.get("/cities", (cities) => {
 			this.cityData = cities
-			console.log('dud');
 		})
 	}
 
 	
-	async getCityData() {
+	async getCityData(cityName) {
 		console.log('a');
 		try {
-		await $.get("/city/:cityName", (city) => {
+		await $.get(`/city/${cityName}`, (city) => {
 			console.log('b');
 			this.cityData = {
 				CityName: city.name,
 				Temperature: city.main.temp,
-				Conditions: city.weather.description, 
-				ConditionIcon: city.weather.icon
+				Conditions: city.weather[0].description, 
+				ConditionIcon: city.weather[0].icon
 			}
+			// console.log(this.cityData);
 			console.log('c');
 		})
 		console.log('d');
@@ -36,15 +36,24 @@ class Manager {
 
 	saveCity(cityName) {
 		console.log('a2');
-		
-		$.post('/city', cityName, () => {
-			
+		let city = this.cityData.find(city => city.cityName === cityName)
+
+		$.post('/city', city, () => {
+			console.log("it worked?");	
 		})
 	}
 
 
-	removeCity() {
-		
+	removeCity(cityName) {
+		console.log('remove?');
+
+		$.ajax({
+    		url: `/city/${cityName}`,
+    		method: "DELETE",
+    		success: () => {
+				console.log('I guess');
+			}
+		})
 	}
 
 }
