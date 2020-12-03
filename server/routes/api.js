@@ -13,9 +13,10 @@ router.get('/sanity', (req, res) => {
 
 router.get('/city/:cityName', async (req, res) => {
 	const { cityName } = req.params
-	
 	const weatherApi = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
+	
 	res.send(weatherApi.data)
+	// res.send('lol')
 })
 
 
