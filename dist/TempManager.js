@@ -11,6 +11,20 @@ class Manager {
 	}
 
 	
+	getCityData() {
+
+	}
+
+
+	saveCity() {
+
+	}
+
+
+	removeCity() {
+		
+	}
+
 }
 
 
