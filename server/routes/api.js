@@ -13,7 +13,7 @@ router.get('/sanity', (req, res) => {
 
 router.get('/city/:cityName', async (req, res) => {
 	const { cityName } = req.params
-	const weatherApi = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`)
+	const weatherApi = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&appid=${apiKey}`)
 	
 	res.send(weatherApi.data)
 	// res.send('lol')
@@ -22,26 +22,29 @@ router.get('/city/:cityName', async (req, res) => {
 
 router.get('/cities', async (req, res) => {
 	const cities = await Weather.find({})
+	console.log(cities);
 	res.send(cities)
 })
 
 
 router.post('/city', async (req, res) => {
 	const  city  = req.body
+
 	const cityWeather = new Weather({
-		CityName: city.name,
-		Temperature: city.main.temp,
-		Conditions: city.weather[0].description, 
-		ConditionIcon: city.weather[0].icon
+		CityName: city.CityName,
+		Temperature: city.Temperature,
+		Conditions: city.Conditions, 
+		ConditionIcon: city.ConditionIcon
 	})
 	const saveCity = await cityWeather.save()
+	// console.log(saveCity);
 	res.send(saveCity)
 })
 
 router.delete('/city/:cityName', async (req, res) => {
 	const { cityName } = req.params
 
-	const city = await Weather.findOneAndDelete(cityName)
+	const city = await Weather.findOneAndDelete({CityName : cityName})
 	res.send(`Deleted ${cityName}`)
 })
 

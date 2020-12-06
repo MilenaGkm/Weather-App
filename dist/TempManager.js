@@ -4,39 +4,36 @@ class Manager {
 		this.cityData = []
 	}
 
-	getDataFromDB() {
-		$.get("/cities", (cities) => {
+	async getDataFromDB() {
+		await $.get("/cities", (cities) => {
 			this.cityData = cities
 		})
 	}
 
 	
 	async getCityData(cityName) {
-		console.log('a');
-		try {
+		// try {
 		await $.get(`/city/${cityName}`, (city) => {
-			console.log('b');
-			this.cityData = {
+			const cityToAdd = {
 				CityName: city.name,
 				Temperature: city.main.temp,
 				Conditions: city.weather[0].description, 
 				ConditionIcon: city.weather[0].icon
 			}
-			// console.log(this.cityData);
-			console.log('c');
+			this.cityData.push(cityToAdd)
+			console.log(this.cityData);
 		})
-		console.log('d');
-		} catch (error) {
-			// console.error(error);
-			console.log('gg');
-		}
-		console.log('e');
+		// } catch (error) {
+		// 	console.log('gg');
+		// }
 	}
 
 
-	saveCity(cityName) {
-		console.log('a2');
-		let city = this.cityData.find(city => city.cityName === cityName)
+	saveCity(argCityName) {
+		console.log(argCityName);
+		// send api request to save scity as cityData
+		let city = this.cityData.find(c => c.CityName == argCityName)
+		console.log(city);
 
 		$.post('/city', city, () => {
 			console.log("it worked?");	

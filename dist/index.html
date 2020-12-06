@@ -7,31 +7,33 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<title>WHETHER WEATHER</title>
+		<title>heroku login
+		</title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="style.css">
 	</head>
-	<body>
+	<body >
 
 		<div id="search">
 			<input id="city-input" placeholder="City Name">
 			<button id="search-btn" onclick="searchBtn()">Search City</button>
 		</div>
 
-		<div class="weather-container"></div>
-
+		<div class="weather-container">
+		</div>
+		
 		<script id="weather-template" type="text/x-handlebars-template">
 			{{#each cityData}}
-			<div>
-				<span> {{CityName}} </span>
-				<br>
-				<span> {{Temperature}} </span>
-				<br>
-				<span> {{Conditions}} </span>
-				<br>
-				<img src={{ConditionIcon}} >
-				<br>
+			<div class="city-data">
+				<h2> {{this.CityName}} </h2>
+				<p> {{this.Temperature}} </p>
+				<!-- <br> -->
+				<img src="http://openweathermap.org/img/wn/{{this.ConditionIcon}}@2x.png" >
+				<p> {{this.Conditions}} </p>
+				<button class="btn" id="save-Btn" onclick="saveBtn({{clickHelper this}})">+</button>
+				<button class="btn" id="remove-Btn" onclick="removeBtn({{clickHelper this}})">-</button>
+				<!-- <hr> -->
 			</div>
 			{{/each}}
 		</script>
